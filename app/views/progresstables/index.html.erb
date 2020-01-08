@@ -1,0 +1,31 @@
+<p id="notice"><%= notice %></p>
+
+<h1>Progresstables</h1>
+
+<table>
+  <thead>
+    <tr>
+      <th>Iteration1</th>
+      <th>Iteration2</th>
+      <th>Iteration3</th>
+      <th colspan="3"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @progresstables.each do |progresstable| %>
+      <tr>
+        <td><%= progresstable.iteration1 %></td>
+        <td><%= progresstable.iteration2 %></td>
+        <td><%= progresstable.iteration3 %></td>
+        <td><%= link_to 'Show', progresstable %></td>
+        <td><%= link_to 'Edit', edit_progresstable_path(progresstable) %></td>
+        <td><%= link_to 'Destroy', progresstable, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+<br>
+
+<%= link_to 'New Progresstable', new_progresstable_path %>

@@ -1,0 +1,32 @@
+<%= form_with(model: progresstable, local: true) do |form| %>
+  <% if progresstable.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(progresstable.errors.count, "error") %> prohibited this progresstable from being saved:</h2>
+
+      <ul>
+      <% progresstable.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= form.label :iteration1 %>
+    <%= form.text_field :iteration1, id: :progresstable_iteration1 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :iteration2 %>
+    <%= form.text_field :iteration2, id: :progresstable_iteration2 %>
+  </div>
+
+  <div class="field">
+    <%= form.label :iteration3 %>
+    <%= form.text_field :iteration3, id: :progresstable_iteration3 %>
+  </div>
+
+  <div class="actions">
+    <%= form.submit %>
+  </div>
+<% end %>

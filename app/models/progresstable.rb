@@ -1,0 +1,2 @@
+class Progresstable < ApplicationRecord
+end
