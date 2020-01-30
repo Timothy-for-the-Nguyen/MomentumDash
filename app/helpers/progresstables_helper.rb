@@ -1,0 +1,2 @@
+module ProgresstablesHelper
+end
