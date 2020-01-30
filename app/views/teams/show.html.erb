@@ -86,46 +86,23 @@ table, th, td {
 <% if is_instructor_html() %>
 
 <table style="width:100%">
+ <%= form_with scope: :phase, local: true do |form| %>  
   
-   <tr>
-    <th></th>
-    <th>Iteration 0</th>
-    <th>Iteration 1</th>
-    <th>Iteration 2</th>
-  </tr>
+ <tr>
+   <%= form.label "status" %>
+   <%= form.select(:status_type, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+ </tr>
+  <p>
+    <%= form.submit %>
+  </p>
   
-  <tr>
-    <th>Student</th>
-    <th>Missing</th>
-    <th>Missing</th>
-    <th>Missing</th>
-  </tr>
-  <tr>
-    <th>Instructor</th>
-    <th>    
-        <select id="select">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Approved</option> 
-            <option value="2">Inadequate</option> 
-        </select>  
-    </th>
-    <th>
-      <select id="select">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Approved</option> 
-            <option value="2">Inadequate</option> 
-        </select>  
-    </th>
-    <th>
-      <select id="select">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Approved</option> 
-            <option value="2">Inadequate</option> 
-      </select>  
-    </th>
-  </tr>
 </table>
 
+<% end %>
+
+
+</body>
+<!--
 <% else if is_student_on_team(current_user, @team) %>
 
    <table style="width:100%">
@@ -169,39 +146,6 @@ table, th, td {
 </div>
 
 </table>
-<% else %>
-
-   <table style="width:100%">
-
-   <tr>
-    <th></th>
-    <th>Iteration 0</th>
-    <th>Iteration 1</th>
-    <th>Iteration 2</th>
-  </tr>
-
-<tr>
-    <th>Student</th>
-    <th>    Missing
-    </th>
-    <th>    Missing
-    </th>
-    <th>    Missing
-    </th>
-  </tr>
-    <tr>
-    <th>Instructor</th>
-    <th>    Missing
-    </th>
-    <th>    Missing
-    </th>
-    <th>    Missing
-    </th>
-  </tr>
-</table>
-
-
-
 
 <% end %>
 <% end %>
