@@ -1,9 +1,9 @@
 <br>
 <h1 class="display-4 mt-5 ml-5 d-inline">Team: <%=@team.name%></h1>
-<% if has_section_html(@team.project.section.id) || is_student_on_team(current_user, @team) %>
+<% if has_section_html(@team.project.section.id) || is_student_in_section(current_user, @team.project.section) #is_student_on_team(current_user, @team) %>
   <%= link_to 'Edit Team' , edit_team_path(@team), class: "btn btn-danger float-right mt-5 mr-5"%>
 <% end %>
-<% if has_section_html(@team.project.section.id) %>
+<% if is_instructor_html || has_section_html(@team.project.section.id) %>
     <%= link_to "Delete Team", remove_team_path(@team), class: "btn btn-danger float-right mt-5 mr-5" %>
 <% end %>
 
@@ -62,7 +62,10 @@
     </div>
     <div class="card-body">
        <a class="disabled"><strong>Location:</strong> <%= @team.scrum_location %></a>
-       <a class="disabled"><strong>Time:</strong> <%= @team.scrum_time.strftime("%I:%M%p") %></a>
+       <a class="disabled"><strong>Time:</strong> <%= @team.scrum_time.strftime("at %I:%M%p") %></a>
+       
+       
+       
     </div>
   </div>
 </div>
@@ -77,6 +80,12 @@ table, th, td {
   text-align: center;
 }
 </style>
+
+
+
+
+
+
 <body>
 
 
