@@ -5,10 +5,11 @@
   
     <%= render 'layouts/error', object: @student, as: 'object' %>
     
-    <%= f.hidden_field :name, :id => "form_name", :class => "form-control"%>
-    
-    <%= f.hidden_field :email, :id => "form_email", :class => "form-control"%>
+    <% if params[:action] == "new" %>
+      <%= f.hidden_field :name, :id => "form_name", :class => "form-control" %>
       
+      <%= f.hidden_field :email, :id => "form_email", :class => "form-control" %>
+        
       <html lang="en">
         <head>
           <meta name="google-signin-scope" content="profile email">
@@ -35,7 +36,13 @@
         </body>
       </html>
       <br>
+    <% end %>
     <% if params[:action] == "edit" %>
+        <%= label_tag :name %>
+        <%= f.text_field :name , :class => "form-control" %>
+        
+        <%= label_tag :email , nil, :class => "mt-4" %>
+        <%= f.text_field :email , :class => "form-control" %>
       <%= render "layouts/confirm_update", object: @student, as: 'object' %>
     <% end %>
   <% end %>
