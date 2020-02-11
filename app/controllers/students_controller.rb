@@ -20,8 +20,24 @@ class StudentsController < ApplicationController
       end
       redirect_to '/home'
     else
-      flash[:warning] = "An account already exists with that email. Click login to continue."
-      redirect_to '/login'
+      if current_user
+        redirect_to home_path
+      end
+      if user = Admin.find_by_email(@student.email)
+        session[:user_id] = user.id
+        session[:user] = "admin"
+        redirect_to controller: 'home', action: 'index'
+      elsif user = Student.find_by_email(@student.email)
+        session[:user_id] = user.id
+        session[:user] = "student"
+        redirect_to controller: 'home', action: 'index'
+      elsif user = Instructor.find_by_email(@student.email)
+        session[:user_id] = user.id
+        session[:user] = "instructor"
+        redirect_to controller: 'home', action: 'index'
+      else
+        flash[:notice] = "Failed to Log In!"
+      end
     end
   end
   

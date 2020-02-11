@@ -5,10 +5,11 @@
   
     <%= render 'layouts/error', object: @student, as: 'object' %>
     
-    <%= f.hidden_field :name, :id => "form_name", :class => "form-control"%>
-    
-    <%= f.hidden_field :email, :id => "form_email", :class => "form-control"%>
+    <% if params[:action] == "new" %>
+      <%= f.hidden_field :name, :id => "form_name", :class => "form-control" %>
       
+      <%= f.hidden_field :email, :id => "form_email", :class => "form-control" %>
+        
       <html lang="en">
         <head>
           <meta name="google-signin-scope" content="profile email">
@@ -18,8 +19,8 @@
         <body>
           <div class="g-signin2" data-onsuccess="onSignIn" data-theme="dark" style=margin-top:20px></div>
           <script>
+          
             function onSignIn(googleUser) {
-              // Useful data for your client-side scripts:
               var profile = googleUser.getBasicProfile();
               // The ID token you need to pass to your backend:
               // var id_token = googleUser.getAuthResponse().id_token;
@@ -27,26 +28,22 @@
               document.getElementById('form_name').value = profile.getName();
               document.getElementById('form_email').value = profile.getEmail();
               document.getElementById('submit').submit();
+              
+              // Sign out after submitting form to fix redirect loop
+              gapi.auth2.getAuthInstance().signOut();
             }
           </script>
-          
-          <a href="#" onclick="signOut();">Sign out</a>
-            <script>
-              function signOut() {
-                var auth2 = gapi.auth2.getAuthInstance();
-                auth2.signOut().then(function () {
-                  console.log('User signed out.');
-                });
-              }
-            </script>
         </body>
       </html>
       <br>
+    <% end %>
     <% if params[:action] == "edit" %>
+        <%= label_tag :name %>
+        <%= f.text_field :name , :class => "form-control" %>
+        
+        <%= label_tag :email , nil, :class => "mt-4" %>
+        <%= f.text_field :email , :class => "form-control" %>
       <%= render "layouts/confirm_update", object: @student, as: 'object' %>
-    <% else %>
-      <%= f.submit "Create Account", :class => "btn btn-primary mt-4" %>
-      </br>
     <% end %>
   <% end %>
 </div>
