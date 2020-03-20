@@ -92,16 +92,20 @@ table, th, td {
 
 <% if is_instructor_html() %>
 
-=======
 
-<!--
->>>>>>> 6a03a7059847a1ae9ca5ccc7439e11f1730a689c
 <table style="width:100%">
  <%= form_with scope: :phase, local: true do |form| %>  
   
  <tr>
-   <%= form.label "status" %>
+   <th><%= form.label "Iteration 1: " %>
    <%= form.select(:status_type, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+   </th>
+    <th><%= form.label "Iteration 2: " %>
+   <%= form.select(:status_type, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+   </th>
+    <th><%= form.label "Iteration 3: " %>
+   <%= form.select(:status_type, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+   </th>
  </tr>
   <p>
     <%= form.submit %>
@@ -127,7 +131,8 @@ table, th, td {
 
   <tr>
     <th>Student</th>
-        <th>    
+        <th>   
+      
 <body> 
     <div> 
         <select id="select11">                                              
@@ -148,11 +153,6 @@ table, th, td {
         
         <tr>
     <th>Instructor</th>
-<<<<<<< HEAD
-    <th>Missing</th>
-    <th>Missing</th>
-    <th>Missing</th>
-=======
     <th>    
 <body> 
     <div> 
@@ -174,7 +174,6 @@ table, th, td {
             <option value="1">Approved</option> 
             <option value="2">Inadequate</option> 
         </select>  </th>
->>>>>>> 6a03a7059847a1ae9ca5ccc7439e11f1730a689c
   </tr>
 
 
