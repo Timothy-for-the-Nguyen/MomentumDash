@@ -63,11 +63,19 @@
     <div class="card-body">
        <a class="disabled"><strong>Location:</strong> <%= @team.scrum_location %></a>
        <a class="disabled"><strong>Time:</strong> <%= @team.scrum_time.strftime("at %I:%M%p") %></a>
-       
-       
-       
+      </div>
+  </div>
+  <div class="card d-inline-block ml-2 mt-4 text-center" style="width:23%">
+    <div class="card-header">
+      <h5 class="card-title">Iteration Tracker</h5>
+    </div>
+    <div class="card-body">
+       <a class="disabled"><strong>Iteration1:</strong> <%= @team.iteration1 %></a>
+       <a class="disabled"><strong>Iteration2:</strong> <%= @team.iteration2 %></a>
+       <a class="disabled"><strong>Iteration3:</strong> <%= @team.iteration3 %></a>
     </div>
   </div>
+  
 </div>
 
 <div class="container text-center">
@@ -92,23 +100,23 @@ table, th, td {
 
 <% if is_instructor_html() %>
 
-
+<!--
 <table style="width:100%">
- <%= form_with scope: :phase, local: true do |form| %>  
+ <%= form_with scope: :team, local: true do |form| %>  
   
  <tr>
    <th><%= form.label "Iteration 1: " %>
-   <%= form.select(:status_type, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+   <%= form.select(:iteration1, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
    </th>
     <th><%= form.label "Iteration 2: " %>
-   <%= form.select(:status_type, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+   <%= form.select(:iteration2, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
    </th>
     <th><%= form.label "Iteration 3: " %>
-   <%= form.select(:status_type, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+   <%= form.select(:iteration3, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
    </th>
  </tr>
   <p>
-    <%= form.submit %>
+    <%= form.submit id: "Update" , :class => "btn btn-primary" %>
   </p>
   
 </table>
@@ -117,6 +125,7 @@ table, th, td {
 
 
 </body>
+-->
 <!--
 <% else if is_student_on_team(current_user, @team) %>
 

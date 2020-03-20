@@ -88,12 +88,14 @@ class TeamsController < ApplicationController
   
   private def team_create_params
     params.require(:team).permit(:name, :version_control_link,
-      :production_link, :management_link, :scrum_location, :scrum_time)
+      :production_link, :management_link, :scrum_location, :scrum_time, :iteration1, 
+      :iteration2, :iteration3)
   end
   
   private def team_params
     params.require(:team).permit(:name, :version_control_link,
-      :production_link, :management_link, :scrum_location, :scrum_time, student_ids: [])
+      :production_link, :management_link, :scrum_location, :scrum_time,:iteration1, 
+      :iteration2, :iteration3,  student_ids: [])
   end
   
   private def student_params
