@@ -59,6 +59,15 @@ class TeamsController < ApplicationController
     end
   end
   
+  def update2
+    @team = Team.find(params[:id])
+    is_admin_or_student_on_team(@team)
+    if @team.update_attributes(team_params_iterations)
+      flash[:notice] = "#{@team.name} was successfully updated."
+      redirect_to team_path
+    end
+  end
+  
   def remove
     @team = Team.find_by_id(params[:id])
     is_super(@team.project.section)
@@ -89,13 +98,19 @@ class TeamsController < ApplicationController
   private def team_create_params
     params.require(:team).permit(:name, :version_control_link,
       :production_link, :management_link, :scrum_location, :scrum_time, :iteration1, 
-      :iteration2, :iteration3)
+      :iteration2, :iteration3,:iteration4,:status1,
+      :status2,:status3,:status4,)
   end
   
   private def team_params
     params.require(:team).permit(:name, :version_control_link,
       :production_link, :management_link, :scrum_location, :scrum_time,:iteration1, 
-      :iteration2, :iteration3,  student_ids: [])
+      :iteration2, :iteration3,:iteration4,:status1,
+      :status2,:status3,:status4, student_ids: [])
+  end
+  
+  private def team_params_iterations
+    params.permit(:status1,:status2,:status3,:status4)
   end
   
   private def student_params

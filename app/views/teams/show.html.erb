@@ -90,15 +90,21 @@ table, th, td {
 
 
 <table style="width:100%">
- <%= form_with scope: :team, local: true do |form| %>  
+ <%= form_tag  iter_path, :method => "post" do |form| %> 
+ 
    <tr>
-       <th><%= form.label "Iteration 1: " %>
+       <th><%= label_tag "Iteration 1 Status: " %>
+       <a class="disabled"> <%= @team.status1 %></a>
        </th>
-       <th><%= form.label "Iteration 2: " %>
+      <th><%= label_tag "Iteration 2 Status: " %>
+       <a class="disabled"> <%= @team.status2 %></a>
        </th>
-       <th><%= form.label "Iteration 3: " %>
+       <th><%= label_tag "Iteration 3 Status: " %>
+       <a class="disabled"> <%= @team.status3 %></a>
        </th>
-       <th><%= form.label "Iteration 4: " %>
+       <th><%= label_tag "Iteration 4 Status: " %>
+       <a class="disabled"> <%= @team.status4 %></a>
+       </th>
    </th>
    </tr>
  
@@ -114,27 +120,28 @@ table, th, td {
       <a class="disabled"> <%= @team.iteration3 %></a>
    </th>
      <th>
-      <a class="disabled"> <%= @team.iteration3 %></a>
+      <a class="disabled"> <%= @team.iteration4 %></a>
    </th>
  </tr>
  
  <tr>
    
-   <th><%= form.label "Iteration 1: " %>
-   <%= form.select(:iteration1, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+   <th><%= label_tag "Iteration 1: " %>
+   <%= select_tag(:status1, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
    </th>
-    <th><%= form.label "Iteration 2: " %>
-   <%= form.select(:iteration2, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+    <th><%= label_tag "Iteration 2: " %>
+   <%= select_tag(:status2, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
    </th>
-    <th><%= form.label "Iteration 3: " %>
-   <%= form.select(:iteration3, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+    <th><%= label_tag "Iteration 3: " %>
+   <%= select_tag(:status3, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
    </th>
-    <th><%= form.label "Iteration 4: " %>
-   <%= form.select(:iteration3, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+    <th><%= label_tag "Iteration 4: " %>
+   <%= select_tag(:status4, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
    </th>
  </tr>
+ 
   <p>
-    <%= form.submit id: "Update" , :class => "btn btn-primary" %>
+    <%= submit_tag("Update") %>
   </p>
   
 </table>
