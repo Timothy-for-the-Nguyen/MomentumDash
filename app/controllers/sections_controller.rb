@@ -1,21 +1,23 @@
 class SectionsController < ApplicationController
-  before_action :super_access, only: [:new, :edit, :update, :remove, :destroy, :update_roster]
+  before_action :super_access, only: [:new, :edit, :update, :remove, :destroy, :update_roster, :requests]
   before_action :is_student, only: [:join, :leave] #[:new, :create, :edit, :update, :remove, :destroy, :roster, :update_roster]#
   before_action :is_user, only: [:roster]
-  
+
   def new
     @course = Course.find(params[:course_id])
     @section = @course.sections.new
   end
-  
+
   def show
     @section = Section.find_by_id(params[:id])
   end
-  
-  def index 
+
+  def index
     @sections = Section.all
-  end 
-  
+  end
+
+
+
   def create
     @course = Course.find(params[:course_id])
     @section = @course.sections.build(section_params)
@@ -26,30 +28,32 @@ class SectionsController < ApplicationController
         if instructor
           @section.instructors << instructor
         end
-        
+
       end
       if is_instructor_html
         user = Instructor.find_by_id(session[:user_id])
         user.sections << @section
       end
-      
-      
+
+
         student_id = params[:section][:student_ids]
         student = Student.find_by_id(student_id)
         if student
           @section.instructor << student
         end
-      
+
       redirect_to courses_path
     else
       render 'new'
     end
   end
-  
+
+
+
   def edit
     @section = find_section(params[:id])
   end
-  
+
   def update
     @section = find_section(params[:id])
     if @section.update_attributes(section_params)
@@ -66,12 +70,12 @@ class SectionsController < ApplicationController
       render 'edit'
     end
   end
-  
-  def remove 
+
+  def remove
     @section = find_section(params[:id])
   end
-  
-  def destroy 
+
+  def destroy
     if session[:user] == "admin"
       @section = find_section(params[:id])
       check = is_admin_html
@@ -89,17 +93,17 @@ class SectionsController < ApplicationController
     else
       flash[:warning] = "This should never happened"
       redirect_to :action => 'remove', :id => params[:id], :method => :get
-    end 
+    end
   end
-  
-  
-  
+
+
+
   def update_roster
     @section = find_section(params[:section_id])
     # does any roster updating need to happen?
     if params[:section].present? and params[:section][:emails_attributes].present?
-      
-      params[:section][:emails_attributes].each_pair do |index, email_atr| 
+
+      params[:section][:emails_attributes].each_pair do |index, email_atr|
         # we're not removing the email
         if email_atr[:_destroy] == 'false'
           # email already in roster if id is present
@@ -110,7 +114,7 @@ class SectionsController < ApplicationController
               # remove email and student from section if email changes
               @section.emails.delete(email)
               remove_student(email.email, @section)
-              # need to check if the new email exists 
+              # need to check if the new email exists
               existing_email = Email.find_by_email(email_atr[:email])
               if existing_email
                 @section.emails << existing_email unless @section.emails.include?(existing_email)
@@ -130,19 +134,19 @@ class SectionsController < ApplicationController
           remove_student(email_atr[:email], @section)
         end
       end
-      
+
       if @section.update_attributes(section_params)
         flash[:notice] = "Section #{@section.number} roster was successfully updated."
         redirect_to section_projects_path(@section)
       else
         render 'roster'
       end
-      
+
     else
       redirect_to section_projects_path(@section)
     end
   end
-  
+
   def import
     @section = find_section(params[:section_id])
     # Check to make sure file exists (within section params) and is not nil
@@ -160,7 +164,13 @@ class SectionsController < ApplicationController
       redirect_to section_projects_path(@section), notice: "No file uploaded! Please check your CSV roster upload and try again!"
     end
   end
-  
+
+  def requests
+     @section = find_section(params[:section_id])
+     #@section.email = find_by_email(params[:section][:emails_attributes])
+     #@email = Email.find_by_id(email_atr[1])
+   end
+
   def join
     @section = Section.find(params[:section_id])
     @student = current_user
@@ -172,7 +182,7 @@ class SectionsController < ApplicationController
     end
     redirect_to section_projects_path(@section)
   end
-  
+
   def leave
     @section = Section.find(params[:section_id])
     @student = current_user
@@ -185,11 +195,11 @@ class SectionsController < ApplicationController
     end
     redirect_to section_projects_path(@section)
   end
-  
+
   private def section_params
     params.require(:section).permit(:number, :semester, :year, emails_attributes: [:id, :email, :_destroy])
   end
-  
+
   private def remove_student(email, section)
     student = Student.find_by_email(email)
     if student
@@ -197,19 +207,19 @@ class SectionsController < ApplicationController
       remove_student_from_teams(student)
     end
   end
-  
+
   private def remove_student_from_teams(student)
     @section.teams.each do |team|
       team.students.delete(student)
     end
   end
-  
-  
+
+
   def roster
     @section = find_section(params[:section_id])
   end
-  
-  
+
+
   private def find_section(id)
     if is_instructor_html
       @section = Instructor.find_by_id(session[:user_id]).sections.find_by_id(id)
