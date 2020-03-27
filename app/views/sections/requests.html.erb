@@ -1,25 +1,37 @@
 <% if is_instructor_html() %>
 
- <div class="jumbotron w-50 mx-auto">
-   <%= form_for @section, url: {action: "requests"}, multipart: true, method: :post do |form| %>
-     <h3>Section <%= @section.number %> Join Requests</h3>
-     <%= render 'layouts/error', object: @section, as: 'object' %>
+<div class="jumbotron w-50 mx-auto">
+  <%= form_for @section, url: {action: "requests"}, multipart: true, method: :post do |form| %>
+    <h3>Section <%= @section.number %> Join Requests</h3>
+    <%= render 'layouts/error', object: @section, as: 'object' %>
 
 
-     ericanderson@tamu.edu
-     <%= form.submit "Accept", :class => "btn btn-success mt-4" %>
- 	    <%= form.submit "Deny", :class => "btn btn-danger mt-4" %>
- 	    <br>
- 	    timothynguyen@tamu.edu
+    <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+    <label for="vehicle1">ericanderson@tamu.edu</label><br>
+    <input type="checkbox" id="vehicle2" name="vehicle2" value="Car">
+    <label for="vehicle2">timothynguyen@tamu.edu</label><br>
+    <input type="checkbox" id="vehicle3" name="vehicle3" value="Boat">
+    <label for="vehicle3">z@tamu.edu</label><br>
     <%= form.submit "Accept", :class => "btn btn-success mt-4" %>
- 	    <%= form.submit "Deny", :class => "btn btn-danger mt-4" %>
- 	    <br>
- 	    z@tamu.edu
-    <%= form.submit "Accept", :class => "btn btn-success mt-4" %>
- 	    <%= form.submit "Deny", :class => "btn btn-danger mt-4" %>
-
-   <% end %>
- </div>
+  	<%= form.submit "Deny", :class => "btn btn-danger mt-4" %>
 
 
- <%end%>
+
+    <% if false %>
+      ericanderson@tamu.edu
+      <%= form.submit "Accept", :class => "btn btn-success mt-4" %>
+	    <%= form.submit "Deny", :class => "btn btn-danger mt-4" %>
+	    <br>
+	    timothynguyen@tamu.edu
+      <%= form.submit "Accept", :class => "btn btn-success mt-4" %>
+	    <%= form.submit "Deny", :class => "btn btn-danger mt-4" %>
+	    <br>
+	    z@tamu.edu
+      <%= form.submit "Accept", :class => "btn btn-success mt-4" %>
+	    <%= form.submit "Deny", :class => "btn btn-danger mt-4" %>
+    <% end %>
+  <% end %>
+</div>
+
+
+<%end%>
