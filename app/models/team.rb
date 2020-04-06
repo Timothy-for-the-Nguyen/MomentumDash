@@ -2,6 +2,8 @@ class Team < ApplicationRecord
   belongs_to :project
   has_and_belongs_to_many :students
   
+  has_many :iterations
+  
   validates_presence_of :name
   
   validates_length_of :name, :maximum => 60

@@ -13,7 +13,9 @@ Rails.application.routes.draw do
   resources:courses, shallow: true do
     resources :sections, shallow: true do
       resources :projects, shallow: true, except: [:show] do
-        resources :teams, except: [:index]
+        resources :teams, except: [:index] do
+          resources :iterations
+        end
       end
     end
   end
