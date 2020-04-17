@@ -44,8 +44,11 @@
     <%= form.datetime_select :scrum_time, id: "datetime_select", placeholder: "06:30", ampm: true, discard_year: true, discard_month: true, discard_day: true, :class => " form-control" %>
     <br>
     
-    
-   
+      <% if is_instructor_html() %>
+        <%= label_tag :iteration_num , nil , :class => "mt-4" %>
+        <%= form.select :iteration_num, Project.difficulties, :id => "difficulty" %>
+      <%end%>
+   <br>
     <!--
     <br>
     <%= label_tag :iteration1 , nil , :class => "mt-4" %>
