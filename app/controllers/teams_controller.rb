@@ -87,6 +87,10 @@ class TeamsController < ApplicationController
     
     if check
       flash[:notice] = "#{removed_team.name} was successfully deleted."
+      @iter = removed_team.iterations
+      @iter.each do |thing|
+            thing.destroy
+        end 
       removed_team.destroy
       redirect_to section_projects_path(removed_team.project.section)
     else
