@@ -90,89 +90,47 @@ table, th, td {
 
 
 <h2> iterations</h2>
-<% @team.iterations.each do |iterations| %>
-  <p>
-    <strong>status:</strong>
-    <%= iterations.status %>
-  </p>
- 
-  <p>
-    <strong>Comments:</strong>
-    <%= iterations.comments %>
-  </p>
+<% @team.iterations.each.with_index do |iters,index| %>
+<table style="width:100%">
+
+    <tr>
+      
+        <th><%= label_tag "Iteration #{index} Status: " %>
+       
+             <%= iters.status %>
+           
+        </th>
+        <th><%= label_tag "Comments: " %>
+            <a class="disabled"> <%= iters.comments %></a>
+        </th>
+        <th>
+            <%= label_tag "Created at: " %>
+            <a class="disabled"> <%= iters.created_at %></a>
+        </th>
+        <th>
+            <%= label_tag "Last updated at: " %>
+            <a class="disabled"> <%= iters.updated_at %></a>
+        </th>
+        
+   </tr>
+</table>
 <% end %>
 
 <h2> Add a iteration </h2>
 <%= form_with(model: [ @team, @team.iterations.build ], local: true) do |form| %>
-  <p>
+  <!--<p>
     <%= form.label :status %><br>
-     <%= form.select(:status, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
+     <%= form.select(:status, options_for_select([['submitted', 'submitted'], ['missing', 'missing']])) %>
   </p>
   <p>
     <%= form.label :comments %><br>
     <%= form.text_area :comments %>
   </p>
+  -->
   <p>
     <%= form.submit %>
   </p>
 <% end %>
-<!--
-<table style="width:100%">
- <%= form_tag  iter_path, :method => "post" do |form| %> 
- 
-   <tr>
-       <th><%= label_tag "Iteration 1 Status: " %>
-       <a class="disabled"> <%= @team.status1 %></a>
-       </th>
-      <th><%= label_tag "Iteration 2 Status: " %>
-       <a class="disabled"> <%= @team.status2 %></a>
-       </th>
-       <th><%= label_tag "Iteration 3 Status: " %>
-       <a class="disabled"> <%= @team.status3 %></a>
-       </th>
-       <th><%= label_tag "Iteration 4 Status: " %>
-       <a class="disabled"> <%= @team.status4 %></a>
-       </th>
-   </th>
-   </tr>
- 
-  <tr>
-   
-   <th>
-   <a class="disabled"> <%= @team.iteration1 %></a>
-   </th>
-   <th>
-   <a class="disabled"> <%= @team.iteration2 %></a>
-   </th>
-    <th>
-      <a class="disabled"> <%= @team.iteration3 %></a>
-   </th>
-     <th>
-      <a class="disabled"> <%= @team.iteration4 %></a>
-   </th>
- </tr>
- 
- <tr>
-   
-   <th><%= label_tag "Iteration 1: " %>
-   <%= select_tag(:status1, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
-   </th>
-    <th><%= label_tag "Iteration 2: " %>
-   <%= select_tag(:status2, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
-   </th>
-    <th><%= label_tag "Iteration 3: " %>
-   <%= select_tag(:status3, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
-   </th>
-    <th><%= label_tag "Iteration 4: " %>
-   <%= select_tag(:status4, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
-   </th>
- </tr>
- 
-  <p>
-    <%= submit_tag("Update") %>
-  </p>
-  
-</table>
 
 <% end %>
 
@@ -220,9 +178,8 @@ table, th, td {
 
   
 </table>
--->
 <% end %>
 <% end %>
-<% end %>
+
 
 

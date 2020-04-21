@@ -66,6 +66,9 @@
         <div class="card-footer text-center">
           <% project.teams.each do |team| %>
               <%= link_to "View " + team.name, team_path(team) , class: "btn btn-primary mr-5"%>
+              
+            <p><%="Last updated at: "%><%= team.updated_at %></p>
+              
               <% if team.version_control_link.present? %>
                 <a class="btn btn-info" href=<%= team.version_control_link %> target='_blank'>Version Control</a>
               <% else %>

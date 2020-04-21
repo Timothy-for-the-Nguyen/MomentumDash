@@ -44,29 +44,7 @@
     <%= form.datetime_select :scrum_time, id: "datetime_select", placeholder: "06:30", ampm: true, discard_year: true, discard_month: true, discard_day: true, :class => " form-control" %>
     <br>
     
-      <% if is_instructor_html() %>
-        <%= label_tag :iteration_num , nil , :class => "mt-4" %>
-        <%= form.select :iteration_num, Project.difficulties, :id => "difficulty" %>
-      <%end%>
-   <br>
-    <!--
-    <br>
-    <%= label_tag :iteration1 , nil , :class => "mt-4" %>
-    <%= form.text_field :iteration1, id: "iteration1", placeholder: "Missing", :class => " form-control" %>
-  
-  
-   <%= label_tag :iteration2 , nil , :class => "mt-4" %>
-    <%= form.text_field :iteration2, id: "iteration2", placeholder: "Missing", :class => " form-control" %>
-  
-  
-   <%= label_tag :iteration3 , nil , :class => "mt-4" %>
-    <%= form.text_field :iteration3, id: "iteration3", placeholder: "Missing", :class => " form-control" %>
-  
-  <%= label_tag :iteration4 , nil , :class => "mt-4" %>
-    <%= form.text_field :iteration4, id: "iteration3", placeholder: "Missing", :class => " form-control" %>
-  
-    <br>
-    -->
+   
     <%= form.submit id: "submit-team" , :class => "btn btn-primary" %>
   <% end %>
 </div>
