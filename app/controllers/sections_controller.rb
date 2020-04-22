@@ -176,9 +176,12 @@ class SectionsController < ApplicationController
     @student = current_user
     @course = Course.find(@section.course_id)
     if Request.exists?(email: @student.email)
-    	if Request.exists?(course: @section.course_id)
-			flash[:warning] = "Request Not Created"
-		end
+    	if Request.exists?(course: @course.code)
+			 flash[:warning] = "Request Not Created"
+      else
+        @request = @section.requests.create(email: @student.email, course: @course.code, name: @student.name, accepted: false)
+        flash[:notice] = "Request Created"
+		  end
     else
     	@request = @section.requests.create(email: @student.email, course: @course.code, name: @student.name, accepted: false)
     	flash[:notice] = "Request Created"
