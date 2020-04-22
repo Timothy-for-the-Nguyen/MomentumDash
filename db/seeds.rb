@@ -28,6 +28,7 @@ end
 
 base_course.each do |course|
 	Course.create(course)
+end
 
 base_student.each do |inst|
   Student.create(inst)
