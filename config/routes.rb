@@ -14,7 +14,9 @@ Rails.application.routes.draw do
     resources :sections, shallow: true do
       resources :requests
       resources :projects, shallow: true, except: [:show] do
-        resources :teams, except: [:index]
+        resources :teams, except: [:index] do
+          resources :iterations
+        end
       end
     end
   end

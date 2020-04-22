@@ -87,6 +87,10 @@ class TeamsController < ApplicationController
     
     if check
       flash[:notice] = "#{removed_team.name} was successfully deleted."
+      @iter = removed_team.iterations
+      @iter.each do |thing|
+            thing.destroy
+        end 
       removed_team.destroy
       redirect_to section_projects_path(removed_team.project.section)
     else
@@ -99,14 +103,14 @@ class TeamsController < ApplicationController
     params.require(:team).permit(:name, :version_control_link,
       :production_link, :management_link, :scrum_location, :scrum_time, :iteration1, 
       :iteration2, :iteration3,:iteration4,:status1,
-      :status2,:status3,:status4,)
+      :status2,:status3,:status4,:iteration_num)
   end
   
   private def team_params
     params.require(:team).permit(:name, :version_control_link,
       :production_link, :management_link, :scrum_location, :scrum_time,:iteration1, 
       :iteration2, :iteration3,:iteration4,:status1,
-      :status2,:status3,:status4, student_ids: [])
+      :status2,:status3,:status4, :iteration_num, student_ids: [])
   end
   
   private def team_params_iterations

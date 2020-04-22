@@ -89,6 +89,57 @@ table, th, td {
 <% if is_instructor_html() %>
 
 
+<h2> iterations</h2>
+<% @team.iterations.each.with_index do |iters,index| %>
+<table style="width:100%">
+
+    <tr>
+      
+        <th><%= label_tag "Iteration #{index} Status: " %>
+       
+             <%= iters.status %>
+           
+        </th>
+        <th><%= label_tag "Comments: " %>
+            <a class="disabled"> <%= iters.comments %></a>
+        </th>
+        <th>
+            <%= label_tag "Created at: " %>
+            <a class="disabled"> <%= iters.created_at %></a>
+        </th>
+        <th>
+            <%= label_tag "Last updated at: " %>
+            <a class="disabled"> <%= iters.updated_at %></a>
+        </th>
+        
+   </tr>
+</table>
+<% end %>
+
+<h2> Add a iteration </h2>
+<%= form_with(model: [ @team, @team.iterations.build ], local: true) do |form| %>
+  <!--<p>
+    <%= form.label :status %><br>
+     <%= form.select(:status, options_for_select([['submitted', 'submitted'], ['missing', 'missing']])) %>
+  </p>
+  <p>
+    <%= form.label :comments %><br>
+    <%= form.text_area :comments %>
+  </p>
+  -->
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<% end %>
+
+
+</body>
+
+
+<% else if is_student_on_team(current_user, @team) %>
+
 <table style="width:100%">
  <%= form_tag  iter_path, :method => "post" do |form| %> 
  
@@ -124,102 +175,11 @@ table, th, td {
    </th>
  </tr>
  
- <tr>
-   
-   <th><%= label_tag "Iteration 1: " %>
-   <%= select_tag(:status1, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
-   </th>
-    <th><%= label_tag "Iteration 2: " %>
-   <%= select_tag(:status2, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
-   </th>
-    <th><%= label_tag "Iteration 3: " %>
-   <%= select_tag(:status3, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
-   </th>
-    <th><%= label_tag "Iteration 4: " %>
-   <%= select_tag(:status4, options_for_select([['submitted', 'submitted'], ['missing', 'missing']]), {include_blank: true}) %>
-   </th>
- </tr>
- 
-  <p>
-    <%= submit_tag("Update") %>
-  </p>
+
   
 </table>
-
-<% end %>
-
-
-</body>
-
-<!--
-<% else if is_student_on_team(current_user, @team) %>
-
-   <table style="width:100%">
-
-   <tr>
-    <th></th>
-    <th>Iteration 0</th>
-    <th>Iteration 1</th>
-    <th>Iteration 2</th>
-  </tr>
-
-  <tr>
-    <th>Student</th>
-        <th>   
-      
-<body> 
-    <div> 
-        <select id="select11">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Submitted</option> 
-        </select>  
-    </div> 
-</body>
-    </th>
-    <th><select id="select12">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Submitted</option> 
-        </select>  </th>
-    <th><select id="select13">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Submitted</option> 
-        </select>  </th>
-        
-        <tr>
-    <th>Instructor</th>
-    <th>    
-<body> 
-    <div> 
-        <select id="select21">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Approved</option> 
-            <option value="2">Inadequate</option> 
-        </select>  
-    </div> 
-</body>
-    </th>
-    <th><select id="select22">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Approved</option> 
-            <option value="2">Inadequate</option> 
-        </select>  </th>
-    <th><select id="select23">                                              
-            <option value="0">Missing</option> 
-            <option value="1">Approved</option> 
-            <option value="2">Inadequate</option> 
-        </select>  </th>
-  </tr>
-
-
-<<<<<<< HEAD
-</div>
-
-</table>
-
 <% end %>
 <% end %>
-=======
--->
 
 
-</body>
+
