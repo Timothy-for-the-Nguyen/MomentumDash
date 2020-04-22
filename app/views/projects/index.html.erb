@@ -5,30 +5,38 @@
   <%= link_to 'Adjust Roster' , section_roster_path(@section), id: "roster_section_#{@section.number}" , class: "btn btn-success float-right mt-4 mr-5" %>
 <% end %>
 <br>
-<h2 class="display-5 mt-4 ml-5 d-inline-block">Instructor: 
+<h2 class="display-5 mt-4 ml-5 d-inline-block">Instructor:
 <% @section.instructors.each do |i| %>
 <%= i.name %>
 <% end %>
 </h2>
 <br>
 </h2>
+
+
 <% if is_student_html && !is_student_in_section(current_user, @section) %>
-  <%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "join_section_#{@section.number}" , class: "btn btn-success float-right mt-5 mr-5" %>
+  <%= link_to 'Request to Join Section' , section_req_path(@section), method: :post, id: "req_section_#{@section.number}" , class: "btn btn-success float-right mt-1 mr-5" %>
+<% end %>
+
+<% if is_student_html && !is_student_in_section(current_user, @section) %>
+  <%= link_to 'Join Section' , section_join_path(@section), method: :post, id: "join_section_#{@section.number}" , class: "btn btn-success float-right mt-1 mr-5" %>
 <% end %>
 
 <% if is_student_in_section(current_user, @section) %>
   <p class="d-inline text-muted ml-4">Currently registered</p>
   <%= link_to 'Leave Section' , section_leave_path(@section), method: :patch, id: "leave_section_#{@section.number}" , class: "btn btn-danger float-right mt-5 mr-5" %>
   <%= link_to 'Adjust Roster' , section_roster_path(@section), id: "roster_section_#{@section.number}" , class: "btn btn-success float-right mt-4 mr-5" %>
-<% end %>
+<% end %>a
 
-<hr>
+
 <%= link_to 'Back', courses_path, id: 'back', :class => "btn btn-warning float-right mt-1 mr-5"%>
 <% if has_section_html(@section.id) %>
   <%= button_to "New Project", { action: :new, controller: :projects}, method: :get, id: "new_project" , class: "btn btn-success ml-5" %>
 <% end %>
 
 
+
+<hr>
 
 <h3 class="text-center display-4">Projects</h3>
 <div class="container mx-auto text-center">
@@ -53,15 +61,15 @@
           </div>
         </div>
       </div>
-      
+
       <div class="card-body text-center">
         <p class="card-title d-inline text-muted float-left"><%= project.description %></p>
         <% project.skills.each do |skill| %>
           <button class="btn btn-info disabled ml-2"><%= skill.name %></button>
         <% end %>
       </div>
-      
-      <% unless project.teams.empty? %> 
+
+      <% unless project.teams.empty? %>
         <div class="card-footer text-center">
           <% project.teams.each do |team| %>
               <%= link_to "View " + team.name, team_path(team) , class: "btn btn-primary mr-5"%>
