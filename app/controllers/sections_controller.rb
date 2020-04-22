@@ -1,6 +1,6 @@
 class SectionsController < ApplicationController
   before_action :super_access, only: [:new, :edit, :update, :remove, :destroy, :update_roster, :requests]
-  before_action :is_student, only: [:join, :leave] #[:new, :create, :edit, :update, :remove, :destroy, :roster, :update_roster]#
+  before_action :is_student, only: [:join, :leave, :req] #[:new, :create, :edit, :update, :remove, :destroy, :roster, :update_roster]#
   before_action :is_user, only: [:roster]
 
   def new
@@ -39,7 +39,7 @@ class SectionsController < ApplicationController
         student_id = params[:section][:student_ids]
         student = Student.find_by_id(student_id)
         if student
-          @section.instructor << student
+          @section.instructors << student
         end
 
       redirect_to courses_path
@@ -171,6 +171,31 @@ class SectionsController < ApplicationController
      #@email = Email.find_by_id(email_atr[1])
    end
 
+  def req
+    @section = find_section(params[:section_id])
+    @student = current_user
+    @course = Course.find(@section.course_id)
+    if Request.exists?(email: @student.email)
+    	if Request.exists?(course: @section.course_id)
+			flash[:warning] = "Request Not Created"
+		end
+    else
+    	@request = @section.requests.create(email: @student.email, course: @course.code, name: @student.name, accepted: false)
+    	flash[:notice] = "Request Created"
+    end
+    
+    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    puts @student.id.inspect
+    puts @course.inspect
+    puts @section.inspect
+    puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+
+
+    
+
+    redirect_to section_projects_path(@section)
+  end
+
   def join
     @section = Section.find(params[:section_id])
     @student = current_user
@@ -178,7 +203,7 @@ class SectionsController < ApplicationController
       @section.students << @student
       flash[:notice] = "You've successfully joined section #{@section.number} for the course #{@section.course.name}."
     else
-      flash[:warning] = "Sorry, you aren't currently enrolled in section #{@section.number} for the course #{@section.course.name}."
+      flash[:warning] = "Sorry, you aren't currently enrolled in section #{@section.number} for the course #{@section.course.name}. Please request to join if you should be in the section."
     end
     redirect_to section_projects_path(@section)
   end
@@ -222,8 +247,12 @@ class SectionsController < ApplicationController
 
   private def find_section(id)
     if is_instructor_html
+      #puts @section.inspect
+      #render :text => @Instructor.inspect
       @section = Instructor.find_by_id(session[:user_id]).sections.find_by_id(id)
+      #render :text => @section.inspect
       if @section == nil
+        #puts @section.inspect
         flash[:warning] = "Unauthorized action"
         redirect_to new_session_path
       end

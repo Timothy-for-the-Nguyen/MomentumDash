@@ -1,0 +1,16 @@
+<% if is_instructor_html() %>
+
+<div class="jumbotron w-50 mx-auto">
+  
+ 
+
+    <% @requests.each do |request| %>
+      <h3><%= request.course %>-<%= request.section_id %> Requests</h3>
+      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
+      <label for="vehicle1"><%= request.email %></label><br>
+    <%end%>
+  
+</div>
+
+
+<%end%>
