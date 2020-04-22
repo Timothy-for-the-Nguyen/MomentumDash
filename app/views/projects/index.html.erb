@@ -75,7 +75,7 @@
           <% project.teams.each do |team| %>
               <%= link_to "View " + team.name, team_path(team) , class: "btn btn-primary mr-5"%>
               
-            <p><%="Last updated at: "%><%= team.updated_at %></p>
+            <p><%="Last updated at: "%><%= team.updated_at.strftime('%m/%d/%Y %I:%M %p').%></p>
               
               <% if team.version_control_link.present? %>
                 <a class="btn btn-info" href=<%= team.version_control_link %> target='_blank'>Version Control</a>
