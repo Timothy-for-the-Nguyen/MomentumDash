@@ -1,0 +1,26 @@
+<h2> iterations</h2>
+<% @iteration.each.with_index do |iters,index| %>
+<table style="width:100%">
+
+    <tr>
+      
+        <th><%= label_tag "Iteration #{index} Status: " %>
+       
+             <%= iters.status %>
+           
+        </th>
+        <!--<th><%= label_tag "Comments: " %>
+            <a class="disabled"> <%= iters.comments %></a>
+        </th>
+        <th>
+            <%= label_tag "Created at: " %>
+            <a class="disabled"> <%= iters.created_at %></a>
+        </th> -->
+        <th>
+            <%= label_tag "Last updated at: " %>
+            <a class="disabled"> <%= iters.team_id %></a>
+        </th>
+           
+   </tr>
+ </table>
+<% end %>
