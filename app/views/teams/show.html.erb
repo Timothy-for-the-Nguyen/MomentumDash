@@ -14,7 +14,7 @@
 <div class="container text-center">
   <div class="card d-inline-block ml-4 mt-4 text-center w-75">
     <div class="card-header">
-      <h5 class="card-title">Team members</h5>
+      <h5 class="card-title">Team Members</h5>
     </div>
     <div class="card-body">
       <% if @team.students.empty? %>
@@ -34,7 +34,11 @@
       <h5 class="card-title">Version Control</h5>
     </div>
     <div class="card-body">
-       <a href=<%= @team.version_control_link %> target="_blank"><%= @team.version_control_link %></a>
+        <% if @team.version_control_link.present? %>
+           <a href=<%= @team.version_control_link %> target="_blank"><%= @team.version_control_link %></a>
+       <% else %>
+            <a class="disabled">N/A</a>
+        <% end %>
     </div>
   </div>
   
@@ -43,7 +47,11 @@
       <h5 class="card-title">Production Site</h5>
     </div>
     <div class="card-body">
-       <a href=<%= @team.production_link %> target="_blank"><%= @team.production_link %></a>
+        <% if @team.production_link.present? %>
+           <a href=<%= @team.production_link %> target="_blank"><%= @team.production_link %></a>
+        <% else %>
+            <a class="disabled">N/A</a>
+        <% end %>
     </div>
   </div>
   
@@ -52,7 +60,11 @@
       <h5 class="card-title">Management Tracker</h5>
     </div>
     <div class="card-body">
-       <a href=<%= @team.management_link %> target="_blank"><%= @team.management_link %></a>
+        <% if @team.management_link.present? %>
+           <a href=<%= @team.management_link %> target="_blank"><%= @team.management_link %></a>
+        <% else %>
+            <a class="disabled">N/A</a>
+        <% end %>
     </div>
   </div>
   
@@ -61,8 +73,13 @@
       <h5 class="card-title">Scrum Details</h5>
     </div>
     <div class="card-body">
-       <a class="disabled"><strong>Location:</strong> <%= @team.scrum_location %></a>
-       <a class="disabled"><strong>Time:</strong> <%= @team.scrum_time.strftime("at %I:%M%p") %></a>
+        <% if @team.scrum_location.present? %>
+           <a class="disabled"><strong>Location:</strong> <%= @team.scrum_location %></a>
+        <% else %>
+            <a class="disabled"><strong>Location:</strong> N/A</a>
+        <% end %>
+       <br>
+       <a class="disabled"><strong>Time:</strong> <%= @team.scrum_time.strftime("%I:%M %p") %></a>
       </div>
   </div>
   
