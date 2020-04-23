@@ -112,21 +112,14 @@ table, th, td {
 
     <tr>
       
-        <th><%= label_tag "Iteration #{index} Status: " %>
+        <th><%= label_tag "Iteration #{index} Status: \n" %>
+       <p><%= iterations.status %></p>
+
+        </th>
        
-             <%= iterations.status %>
-           
-        </th>
-        <th><%= label_tag "iteration ID " %>
-            <a class="disabled"> <%= iterations.id %></a>
-        </th>
-        <!--<th>
-            <%= label_tag "Created at: " %>
-            <a class="disabled"> <%= iterations.created_at %></a>
-        </th> -->
         <th>
-            <%= label_tag "Last updated at: " %>
-            <a class="disabled"> <%= iterations.team_id %></a>
+            <%= label_tag "Last updated at: \n" %>
+            <p> <%= iterations.updated_at.strftime('%m/%d/%Y %I:%M %p') %></p>
         </th>
            
             <td><%= link_to 'view', iterations_details_path(@team, iterations)  %></td>  

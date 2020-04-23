@@ -28,6 +28,7 @@ Rails.application.routes.draw do
 
     get 'teams/:team_id/iterations/:id/details', to: 'iterations#index', as: 'iterations_details'
     get 'teams/:team_id/iterations/:id/delete', to: 'iterations#destroy', as: 'iterations_delete'
+    patch 'teams/:team_id/iterations/:id/update', to: 'iterations#update', as: 'iterations_update'
     #get 'sections/:section_id/requests', to: 'sections#requests', as: 'section_requests'
 
     get 'sections/:section_id/teams', to: 'teams#index', as: 'section_teams'

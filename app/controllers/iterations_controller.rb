@@ -3,7 +3,7 @@ class IterationsController < ApplicationController
     def index
        
        @team = Team.find(params[:team_id])
-       @iteration = @team.iterations.all
+       @iteration = @team.iterations.find(params[:id])
        
     end 
     
@@ -19,7 +19,10 @@ class IterationsController < ApplicationController
     
     def update
         @team = Team.find(params[:team_id])
-        @iterations = team.iterations.update
+        @iteration = @team.iterations.find(params[:id])
+        @update = @iteration.update(iter_params)
+        @team.iteration_update = @team.iterations.find(params[:id]).updated_at
+        redirect_to iterations_details_path(@team, @iteration)
         #@team.last_update = @iterations.last_update
     end 
    
@@ -32,6 +35,6 @@ class IterationsController < ApplicationController
     
     private
         def iter_params
-            params.require(:iteration)
+            params.require(:iteration).permit(:status,:comments)
         end 
 end

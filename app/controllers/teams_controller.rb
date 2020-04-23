@@ -41,7 +41,11 @@ class TeamsController < ApplicationController
             @team.students << student
           end
         end
+    @team.production_link = params[:production_link] || "https://THIS_LINK_DOES_NOT_WORK.tamu.edu/"
+    @team.management_link = params[:production_link] || "https://THIS_LINK_DOES_NOT_WORK.tamu.edu/"
+    @team.version_control_link = params[:production_link] || "https://THIS_LINK_DOES_NOT_WORK.tamu.edu/"
       end
+      
       redirect_to section_projects_path(section_id: @project.section)
     else
       render 'new'
