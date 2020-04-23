@@ -1,26 +1,19 @@
-<h2> iterations</h2>
-<% @iteration.each.with_index do |iters,index| %>
-<table style="width:100%">
+<br>
+<%= link_to 'Back', team_path(@team), id: 'back', :class => "btn btn-warning mt-3 ml-5"%>
+<br>
 
-    <tr>
-      
-        <th><%= label_tag "Iteration #{index} Status: " %>
-       
-             <%= iters.status %>
-           
-        </th>
-        <!--<th><%= label_tag "Comments: " %>
-            <a class="disabled"> <%= iters.comments %></a>
-        </th>
-        <th>
-            <%= label_tag "Created at: " %>
-            <a class="disabled"> <%= iters.created_at %></a>
-        </th> -->
-        <th>
-            <%= label_tag "Last updated at: " %>
-            <a class="disabled"> <%= iters.team_id %></a>
-        </th>
-           
-   </tr>
- </table>
+<h2> Add a iteration </h2>
+<%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
+  <p>
+    <%= form.label :status %><br>
+     <%= form.select(:status, options_for_select([['submitted', 'submitted'], ['missing', 'missing'],['Not submitted','Not submitted']])) %>
+  </p>
+  <p>
+    <%= form.label :comments %><br>
+    <%= form.text_area :comments %>
+  </p>
+  
+  <p>
+    <%= form.submit %>
+  </p>
 <% end %>
