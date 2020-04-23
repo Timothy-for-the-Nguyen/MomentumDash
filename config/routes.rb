@@ -38,6 +38,9 @@ Rails.application.routes.draw do
     patch 'sections/:section_id/leave', to: 'sections#leave', as: 'section_leave'
     post 'sections/:section_id/import', to: 'sections#import'
 
+    post 'sections/:section_id/requests', to: 'requests#accepted', as: 'request_accepted'
+    post 'sections/:section_id/requests', to: 'requests#denied', as: 'request_denied'
+
   resources :admins, except: [:show]
     get 'admin_account', to: 'admins#edit', as:'admin_account'
     post 'admin_account', to: 'admins#update', as: 'update_admin'

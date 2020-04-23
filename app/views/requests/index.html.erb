@@ -4,11 +4,18 @@
   
  
 
-    <% @requests.each do |request| %>
-      <h3><%= request.course %>-<%= request.section_id %> Requests</h3>
-      <input type="checkbox" id="vehicle1" name="vehicle1" value="Bike">
-      <label for="vehicle1"><%= request.email %></label><br>
-    <%end%>
+	<% @requests.each do |request| %>
+	    <h3><%= request.course %>-<%= request.section_id %> Requests</h3>
+    	<label><%= request.email %></label><br>
+	    
+	   	<% if request.accepted == false %>
+	   		<%= link_to 'Accept' , request_accepted_path(request), method: :post, :id=> "accepted#{request.name}" , class: "btn btn-success" %>
+	   		<%= link_to 'Deny' , request_denied_path(request), method: :post, :id=>"denied#{request.name}" , class: "btn btn-danger"%>
+	  		
+	  		
+		<% end %>
+
+	<%end%>
   
 </div>
 

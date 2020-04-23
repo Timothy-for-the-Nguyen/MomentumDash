@@ -5,8 +5,22 @@ class RequestsController < ApplicationController
 	end
 
 	def create
-		@section = current_section
+		@section = Section.find_by_id(params[:section_id])
 		@request = Request.new(params[:request])
+	end
+
+	def accepted
+		@section = Section.find_by_id(params[:section_id])
+		@request = @section.requests.find_by_id(params[:section_id])
+		puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    	puts @student.id.inspect
+    	puts @course.inspect
+    	puts @section.inspect
+    	puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+	end
+
+	def denied
+		
 	end
 
 	def show
