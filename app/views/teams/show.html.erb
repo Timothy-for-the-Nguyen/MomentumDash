@@ -90,30 +90,33 @@ table, th, td {
 
 
 <h2> iterations</h2>
-<% @team.iterations.each.with_index do |iters,index| %>
+<% @team.iterations.each.with_index do |iterations,index| %>
 <table style="width:100%">
 
     <tr>
       
         <th><%= label_tag "Iteration #{index} Status: " %>
        
-             <%= iters.status %>
+             <%= iterations.status %>
            
         </th>
-        <th><%= label_tag "Comments: " %>
-            <a class="disabled"> <%= iters.comments %></a>
+        <th><%= label_tag "iteration ID " %>
+            <a class="disabled"> <%= iterations.id %></a>
         </th>
-        <th>
+        <!--<th>
             <%= label_tag "Created at: " %>
-            <a class="disabled"> <%= iters.created_at %></a>
-        </th>
+            <a class="disabled"> <%= iterations.created_at %></a>
+        </th> -->
         <th>
             <%= label_tag "Last updated at: " %>
-            <a class="disabled"> <%= iters.updated_at %></a>
+            <a class="disabled"> <%= iterations.team_id %></a>
         </th>
-        
+           
+            <td><%= link_to 'view', iterations_details_path(@team, iterations)  %></td>  
+         <td><%= link_to 'delete', iterations_delete_path(@team, iterations),
+                 data: { confirm: 'Are you sure?'} %></td>  
    </tr>
-</table>
+ </table>
 <% end %>
 
 <h2> Add a iteration </h2>

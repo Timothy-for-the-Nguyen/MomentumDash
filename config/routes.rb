@@ -13,8 +13,8 @@ Rails.application.routes.draw do
   resources:courses, shallow: true do
     resources :sections, shallow: true do
       resources :projects, shallow: true, except: [:show] do
-        resources :teams, except: [:index] do
-          resources :iterations
+        resources :teams, shallow:true do
+           resources :iterations
         end
       end
     end
@@ -24,6 +24,8 @@ Rails.application.routes.draw do
     get 'projects/:id/remove', to: 'projects#remove', as: 'remove_project'
     get 'teams/:id/remove', to: 'teams#remove', as: 'remove_team'
     post 'teams/:id/iter', to: 'teams#update2', as: 'iter'
+    get 'teams/:team_id/iterations/:id/details', to: 'iterations#index', as: 'iterations_details'
+    get 'teams/:team_id/iterations/:id/delete', to: 'iterations#destroy', as: 'iterations_delete'
     get 'sections/:section_id/requests', to: 'sections#requests', as: 'section_requests'
     get 'sections/:section_id/teams', to: 'teams#index', as: 'section_teams'
     get 'sections/:section_id/roster', to: 'sections#roster', as: 'section_roster'
