@@ -12,7 +12,7 @@ module CrewCreator
     # Initialize configuration defaults for originally generated Rails version.
     config.load_defaults 5.1
     
-    #Used for rspec routing
+    # Used for rspec routing
     config.generators do |g|
       g.test_framework :rspec,
         :fixtures => true,
@@ -23,6 +23,9 @@ module CrewCreator
         :request_specs => true
       g.fixture_replacement :factory_girl, :dir => "spec/factories"
     end
+    
+    # Set time zone
+    config.time_zone = 'Central Time (US & Canada)'
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers
