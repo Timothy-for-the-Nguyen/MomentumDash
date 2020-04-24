@@ -55,6 +55,7 @@
   <div class="card d-inline-block ml-4 mt-4 w-75">
     <div class="card-header">
     <h2 class="card-title">Current View</h2>
+    <div class="card-body">
     <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
       <p>
         <%= form.label :status, "Set Iteration Status: " %>
