@@ -1,4 +1,5 @@
 <h1 class="display-4 mt-5 ml-5 mb-5">Home</h1>
+
 <% if is_user_html %>
   <div class="container">
     <div class="jumbotron">
@@ -31,5 +32,39 @@
     </div>
   </div>
 <% else %>
-  <a class="btn btn-success ml-5 mb-5" href="/createaccount">Sign In</a>
+  <div class="jumbotron w-50 mx-auto">
+  <%= form_for Student.new, html: { id: "submit" } do |f| %>
+    
+      <%= f.hidden_field :name, :id => "form_name", :class => "form-control" %>
+      
+      <%= f.hidden_field :email, :id => "form_email", :class => "form-control" %>
+        
+      <html lang="en">
+        <head>
+          <meta name="google-signin-scope" content="profile email">
+          <meta name="google-signin-client_id" content="30443356246-e47qs90nbtlkfc0uf12hdfl77fkl9rb1.apps.googleusercontent.com">
+          <script src="https://apis.google.com/js/platform.js" async defer></script>
+        </head>
+        <body>
+          <div class="g-signin2" data-onsuccess="onSignIn" data-theme="light" style=margin-top:20px align='center'></div>
+          <script>
+          
+            function onSignIn(googleUser) {
+              var profile = googleUser.getBasicProfile();
+              // The ID token you need to pass to your backend:
+              // var id_token = googleUser.getAuthResponse().id_token;
+              
+              document.getElementById('form_name').value = profile.getName();
+              document.getElementById('form_email').value = profile.getEmail();
+              document.getElementById('submit').submit();
+              
+              // Sign out after submitting form to fix redirect loop
+              gapi.auth2.getAuthInstance().signOut();
+            }
+          </script>
+        </body>
+      </html>
+      <br>
+  <% end %>
+</div>
 <% end %>
