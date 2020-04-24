@@ -31,6 +31,7 @@
 
 <% if has_section_html(@section.id) %>
   <%= button_to "New Project", { action: :new, controller: :projects}, method: :get, id: "new_project" , class: "btn btn-success float-right mt-3 ml-5 mr-5" %>
+  <%= link_to "Join Requests", section_requests_path(@section) , id: "joinreqs_section_#{@section.id}", class: "btn btn-success float-right mt-3 ml-5 mr-5" %>
 <% end %>
 <%= link_to 'Back', courses_path, id: 'back', :class => "btn btn-warning mt-3 ml-5"%>
 

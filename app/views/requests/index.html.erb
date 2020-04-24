@@ -6,7 +6,7 @@
 	<h1>Requests</h1>
 	<% @requests.each do |request| %>
 	<% if request.accepted == false %>
-	    <h3><%= request.course %>-<%= request.section_id %> Requests</h3>
+	    <h4><%= request.course %>-<%= request.section_id %> Request</h4>
     	<label><%= request.email %></label><br>
 	    
 	   	
