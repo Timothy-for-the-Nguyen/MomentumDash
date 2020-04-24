@@ -10,7 +10,7 @@
   <%= form_for @section, url: {action: "update_roster"}, method: :patch do |form| %>
   
     <%= render 'layouts/error', object: @section, as: 'object' %>
-  
+    <%= label_tag :emails , nil, :class => "mt-2"%>
     <%= form.fields_for :emails do |builder| %>
       <%= render 'email_fields', f: builder %>
     <% end %>

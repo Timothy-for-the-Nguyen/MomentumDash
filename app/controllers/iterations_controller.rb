@@ -21,20 +21,24 @@ class IterationsController < ApplicationController
         @team = Team.find(params[:team_id])
         @iteration = @team.iterations.find(params[:id])
         @update = @iteration.update(iter_params)
-        @team.iteration_update = @team.iterations.find(params[:id]).updated_at
-        redirect_to iterations_details_path(@team, @iteration)
+        i = 1 +  @team.iteration_num
+        @team.update_attributes(:iteration_num=> i)
+       # @team.iteration_update = @team.iterations.find(params[:id]).updated_at
+        flash[:notice] = "Iteration was successfully updated."
+        redirect_to team_path(@team)
         #@team.last_update = @iterations.last_update
     end 
    
    def destroy
       @team = Team.find(params[:team_id])
       @team.iterations.find(params[:id]).destroy
+      flash[:notice] = "Iteration was successfully destroyed."
       redirect_to team_path(@team)
    end 
    
     
     private
         def iter_params
-            params.require(:iteration).permit(:status,:comments)
+            params.require(:iteration).permit(:status,:comments,:teacher_status,:teacher_comment)
         end 
 end

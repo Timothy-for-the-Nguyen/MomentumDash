@@ -2,11 +2,43 @@
 <%= link_to 'Back', team_path(@team), id: 'back', :class => "btn btn-warning mt-3 ml-5"%>
 <br>
 
-<h2> Add a iteration </h2>
+<% if is_instructor_html() %>
+
+<h2><%= label_tag "Student's iteration feedback: \n" %></h2>
+
+       <p>Iteration status: <%= @iteration.status %></p>
+       
+       <p>Comments: <%= @iteration.comments %></p>
+
+<h2>Current view </h2>
+<%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
+  <p>
+    <%= form.label :teacher_status %><br>
+     <%= form.select(:teacher_status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.teacher_status)) %>
+  </p>
+  <p>
+    <%= form.label :teacher_comment %><br>
+    <%= form.text_area :teacher_comment %>
+  </p>
+  
+  <p>
+    <%= form.submit %>
+  </p>
+<% end %>
+
+<% else if is_student_on_team(current_user, @team) %>
+<h2><%= label_tag "Professor feedback: \n" %></h2>
+
+       <p>Iteration status: <%= @iteration.teacher_status %></p>
+       
+       <p>Comments: <%= @iteration.teacher_comment %></p>
+
+
+<h2>Current view </h2>
 <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
   <p>
     <%= form.label :status %><br>
-     <%= form.select(:status, options_for_select([['submitted', 'submitted'], ['missing', 'missing'],['Not submitted','Not submitted']])) %>
+     <%= form.select(:status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.status)) %>
   </p>
   <p>
     <%= form.label :comments %><br>
@@ -16,4 +48,8 @@
   <p>
     <%= form.submit %>
   </p>
+  
+  
+<% end %>
+<% end %>
 <% end %>
