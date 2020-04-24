@@ -26,6 +26,8 @@ module CrewCreator
     
     # Set time zone
     config.time_zone = 'Central Time (US & Canada)'
+    
+    config.assets.enabled = true
 
     # Settings in config/environments/* take precedence over those specified here.
     # Application configuration should go into files in config/initializers

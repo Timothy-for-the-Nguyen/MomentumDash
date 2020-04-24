@@ -9,21 +9,23 @@
   </head>
 
   <body>
-    <nav class="navbar navbar-expand navbar-expand-lg navbar-dark bg-dark">
-      <div class="collapse navbar-collapse">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <a class="navbar-brand mt-1" href="/home">
+          <img src=<%= asset_path('dashboard.png') %> height="30" alt="MomentumDash" class="mr-2 mb-1">MomentumDash</a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor03" aria-controls="navbarColor03" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+        <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
-          <li class="nav-item">
-            <%= link_to 'Home', '/home', :method => :get , :class => "navbar-brand"%>
-          </li>
           
           <% if !current_page?('/login') %>
             <% if !current_user %>
-              <li class="nav-item active">
+              <li class="nav-item">
                 <%= link_to 'Sign In', createaccount_path , :class => "nav-link"%>
               </li>
             <% end %>
             <% else %>
-              <li class="nav-item active">
+              <li class="nav-item">
                 <%= link_to 'Sign In', createaccount_path , :class => "nav-link"%>
               </li>
           <% end %>
