@@ -8,7 +8,7 @@
   <div class="container text-center">
   <div class="card d-inline-block ml-4 mt-4 w-75">
     <div class="card-header">
-    <h5 class="card-title"><%="Student's Iteration Feedback" %></h5>
+    <h5 class="card-title"><%= label_tag :label, "Student's Iteration Feedback" %></h5>
     </div>
     <div class="card-body">
          <p>Iteration Status: <%= @iteration.status %></p>
@@ -43,7 +43,7 @@
   <div class="container text-center">
   <div class="card d-inline-block ml-4 mt-4 w-75">
     <div class="card-header">
-    <h2 class="card-title"><%= label_tag "Professor Feedback: \n" %></h2>
+    <h2 class="card-title"><%= label_tag :label, "Professor Feedback" %></h2>
     </div>
     <div class="card-body">
        <p>Iteration Status: <%= @iteration.teacher_status %></p>
@@ -57,12 +57,13 @@
     <h2 class="card-title">Current View</h2>
     <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
       <p>
-        <%= form.label :status %><br>
+        <%= form.label :status, "Set Iteration Status: " %>
          <%= form.select(:status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.status)) %>
       </p>
       <p>
-        <%= form.label :comments %><br>
-        <%= form.text_area :comments %>
+        <%= form.label :comments, "Set Comment:"%>
+        <br>
+        <%= form.text_area :comments, size: "50x5" %>
       </p>
       
       <p>
