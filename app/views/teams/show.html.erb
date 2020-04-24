@@ -135,15 +135,6 @@ table, th, td {
 
 <br>
 <%= form_with(model: [ @team, @team.iterations.build ], local: true) do |form| %>
-  <!--<p>
-    <%= form.label :status %><br>
-     <%= form.select(:status, options_for_select([['submitted', 'submitted'], ['missing', 'missing']])) %>
-  </p>
-  <p>
-    <%= form.label :comments %><br>
-    <%= form.text_area :comments %>
-  </p>
-  -->
   <p>
     <%= form.submit id: "submit-iteration", :class => "btn btn-warning", :value => "Add Iteration" %>
   </p>

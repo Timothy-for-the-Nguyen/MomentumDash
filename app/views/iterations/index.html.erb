@@ -1,40 +1,53 @@
 <br>
+<h1 class="display-4 mt-5 ml-5 d-inline">Update Iteration</h1>
+<br>
 <%= link_to 'Back', team_path(@team), id: 'back', :class => "btn btn-warning mt-3 ml-5"%>
 <br>
 
 <% if is_instructor_html() %>
-
-<h2><%= label_tag "Student's iteration feedback: \n" %></h2>
-
-       <p>Iteration status: <%= @iteration.status %></p>
-       
-       <p>Comments: <%= @iteration.comments %></p>
-
-<h2>Current view </h2>
-<%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
-  <p>
-    <%= form.label :teacher_status %><br>
-     <%= form.select(:teacher_status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.teacher_status)) %>
-  </p>
-  <p>
-    <%= form.label :teacher_comment %><br>
-    <%= form.text_area :teacher_comment %>
-  </p>
+  <div class="container text-center">
+  <div class="card d-inline-block ml-4 mt-4 w-75">
+    <div class="card-header">
+    <h5 class="card-title"><%="Student's Iteration Feedback" %></h5>
+    </div>
+    <div class="card-body">
+         <p>Iteration Status: <%= @iteration.status %></p>
+         
+         <p>Comments: <%= @iteration.comments %></p>
+    </div>
+  </div>
   
-  <p>
-    <%= form.submit %>
-  </p>
+  <div class="card d-inline-block ml-4 mt-4 w-75">
+    <div class="card-header">
+      <h5 class="card-title">Current View </h5>
+      </div>
+      <div class="card-body">
+      <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
+        <p>
+          <%= form.label :teacher_status, "Set Iteration Status: " %>
+           <%= form.select(:teacher_status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.teacher_status)) %>
+        </p>
+        <p>
+          <%= form.label :teacher_comment, "Set Comment:"%>
+          <br>
+          <%= form.text_area :teacher_comment, size: "50x5" %>
+        </p>
+    <p>
+      <%= form.submit %>
+    </p>
+    </div>
+    </div>
 <% end %>
 
 <% else if is_student_on_team(current_user, @team) %>
-<h2><%= label_tag "Professor feedback: \n" %></h2>
+<h2><%= label_tag "Professor Feedback: \n" %></h2>
 
-       <p>Iteration status: <%= @iteration.teacher_status %></p>
+       <p>Iteration Status: <%= @iteration.teacher_status %></p>
        
        <p>Comments: <%= @iteration.teacher_comment %></p>
 
 
-<h2>Current view </h2>
+<h2>Current View</h2>
 <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
   <p>
     <%= form.label :status %><br>
@@ -48,7 +61,8 @@
   <p>
     <%= form.submit %>
   </p>
-  
+  </div>
+  </div>
   
 <% end %>
 <% end %>
