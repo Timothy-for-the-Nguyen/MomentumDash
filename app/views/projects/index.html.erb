@@ -75,8 +75,8 @@
       <% unless project.teams.empty? %>
         <div class="card-footer text-center">
           <% project.teams.each do |team| %>
-              <%= link_to "View " + team.name, team_path(team) , class: "btn btn-primary"%>
-              <br><br>
+              <%= link_to "View " + team.name, team_path(team) , class: "btn btn-primary mb-4"%>
+              <br>
               <% if team.version_control_link.present? %>
                 <a class="btn btn-info" href=<%= team.version_control_link %> target='_blank'>Version Control</a>
               <% else %>
@@ -92,9 +92,9 @@
               <% else %>
                 <!--<a class="btn btn-info">Team Management</a>!-->
               <% end %>
-              <br><br>
+              <br>
               
-              <p class="text-muted"><%="Last updated at: "%><%= team.updated_at.strftime('%a, %b %d, %Y %I:%M %p')%></p>
+              <p class="text-muted mt-4"><%="Last updated at: "%><%= team.updated_at.strftime('%a, %b %d, %Y %I:%M %p')%></p>
 
               <!--
               .strftime('%m/%d/%Y %I:%M %p')%></p>
