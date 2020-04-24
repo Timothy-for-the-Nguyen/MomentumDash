@@ -10,17 +10,27 @@ class RequestsController < ApplicationController
 	end
 
 	def accepted
-		@section = Section.find_by_id(params[:section_id])
-		@request = @section.requests.find_by_id(params[:section_id])
+		
+		@request = Request.find_by_id(params[:section_id])
+		@section = Section.find_by_id(@request.section_id)
+		@student = Student.find_by_email(@request.email)
 		puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
-    	puts @student.id.inspect
-    	puts @course.inspect
-    	puts @section.inspect
-    	puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+		inspect @student
+		inspect @section
+		puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+		@section.students << @student
+    	@request.update(accepted: true)
+    	flash[:notice] = "Student #{@request.name} was successfully added to course."
+      	redirect_to section_requests_path(@section)
 	end
 
 	def denied
-		
+		@request = Request.find_by_id(params[:section_id])
+		@section = Section.find_by_id(@request.section_id)
+		puts "@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@@"
+    	@request.update(accepted: true)
+    	flash[:warning] = "Student #{@request.name} was denied from course."
+      	redirect_to section_requests_path(@section)
 	end
 
 	def show

@@ -28,7 +28,6 @@ Rails.application.routes.draw do
 
     get 'teams/:team_id/iterations/:id/details', to: 'iterations#index', as: 'iterations_details'
     get 'teams/:team_id/iterations/:id/delete', to: 'iterations#destroy', as: 'iterations_delete'
-    patch 'teams/:team_id/iterations/:id/update', to: 'iterations#update', as: 'iterations_update'
     #get 'sections/:section_id/requests', to: 'sections#requests', as: 'section_requests'
 
     get 'sections/:section_id/teams', to: 'teams#index', as: 'section_teams'
@@ -39,8 +38,8 @@ Rails.application.routes.draw do
     patch 'sections/:section_id/leave', to: 'sections#leave', as: 'section_leave'
     post 'sections/:section_id/import', to: 'sections#import'
 
-    post 'sections/:section_id/requests', to: 'requests#accepted', as: 'request_accepted'
-    post 'sections/:section_id/requests', to: 'requests#denied', as: 'request_denied'
+    post 'sections/:section_id/requests/accepted', to: 'requests#accepted', as: 'request_accepted'
+    post 'sections/:section_id/requests/denied', to: 'requests#denied', as: 'request_denied'
 
   resources :admins, except: [:show]
     get 'admin_account', to: 'admins#edit', as:'admin_account'

@@ -3,12 +3,13 @@
 <div class="jumbotron w-50 mx-auto">
   
  
-
+	<h1>Requests</h1>
 	<% @requests.each do |request| %>
+	<% if request.accepted == false %>
 	    <h3><%= request.course %>-<%= request.section_id %> Requests</h3>
     	<label><%= request.email %></label><br>
 	    
-	   	<% if request.accepted == false %>
+	   	
 	   		<%= link_to 'Accept' , request_accepted_path(request), method: :post, :id=> "accepted#{request.name}" , class: "btn btn-success" %>
 	   		<%= link_to 'Deny' , request_denied_path(request), method: :post, :id=>"denied#{request.name}" , class: "btn btn-danger"%>
 	  		
