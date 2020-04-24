@@ -1,14 +1,15 @@
-<br>
+<div><br>
 <h1 class="display-4 mt-5 ml-5 d-inline">Team: <%=@team.name%></h1>
-<% if has_section_html(@team.project.section.id) || is_student_in_section(current_user, @team.project.section) #is_student_on_team(current_user, @team) %>
-<%= link_to 'Edit Team' , edit_team_path(@team), class: "btn btn-danger float-right mt-5 mr-5"%>
-<% end %>
-<% if is_instructor_html || has_section_html(@team.project.section.id) %>
-<%= link_to "Delete Team", remove_team_path(@team), class: "btn btn-danger float-right mt-5 mr-5" %>
-<% end %>
 <br>
 <%= link_to 'Back', section_projects_path(@team.project.section), id: 'back', :class => "btn btn-warning mt-3 ml-5"%>
+<% if has_section_html(@team.project.section.id) || is_student_in_section(current_user, @team.project.section) #is_student_on_team(current_user, @team) %>
+<%= link_to 'Edit Team' , edit_team_path(@team), class: "btn btn-danger float-right mt-3 mr-5"%>
+<% end %>
+<% if is_instructor_html || has_section_html(@team.project.section.id) %>
+<%= link_to "Delete Team", remove_team_path(@team), class: "btn btn-danger float-right mt-3 mr-5" %>
+<% end %>
 <br>
+<hr>
 <div class="container text-center">
    <div class="card d-inline-block ml-4 mt-4 text-center w-75">
       <div class="card-header">
@@ -129,3 +130,4 @@
    <% end %>
 </body>
 <% end %>
+</div>

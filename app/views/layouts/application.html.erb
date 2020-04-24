@@ -18,17 +18,6 @@
         <div class="collapse navbar-collapse" id="navbarColor03">
         <ul class="navbar-nav mr-auto">
           
-          <% if !current_page?('/login') %>
-            <% if !current_user %>
-              <li class="nav-item">
-                <%= link_to 'Sign In', createaccount_path , :class => "nav-link"%>
-              </li>
-            <% end %>
-            <% else %>
-              <li class="nav-item">
-                <%= link_to 'Sign In', createaccount_path , :class => "nav-link"%>
-              </li>
-          <% end %>
         
           <% if is_admin_html %>
             <li class="nav-item">
