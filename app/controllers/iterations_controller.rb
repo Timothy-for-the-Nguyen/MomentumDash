@@ -21,8 +21,12 @@ class IterationsController < ApplicationController
         @team = Team.find(params[:team_id])
         @iteration = @team.iterations.find(params[:id])
         @update = @iteration.update(iter_params)
-        i = 1 +  @team.iteration_num
-        @team.update_attributes(:iteration_num=> i)
+        if @team.update_helper.nil?
+            @team.update_helper = 1
+        else
+        i = 1 +  @team.update_helper
+        end 
+        @team.update_attributes(:update_helper=> i)
        # @team.iteration_update = @team.iterations.find(params[:id]).updated_at
         flash[:notice] = "Iteration was successfully updated."
         redirect_to team_path(@team)
