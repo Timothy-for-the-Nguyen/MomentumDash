@@ -3,76 +3,69 @@
 <br>
 <%= link_to 'Back', team_path(@team), id: 'back', :class => "btn btn-warning mt-3 ml-5"%>
 <br>
-
 <% if is_instructor_html() %>
-  <div class="container text-center">
-  <div class="card d-inline-block ml-4 mt-4 w-75">
-    <div class="card-header">
-    <h5 class="card-title"><%= label_tag :label, "Student's Iteration Feedback" %></h5>
-    </div>
-    <div class="card-body">
-         <p>Iteration Status: <%= @iteration.status %></p>
-         
-         <p>Comments: <%= @iteration.comments %></p>
-    </div>
-  </div>
-  
-  <div class="card d-inline-block ml-4 mt-4 w-75">
-    <div class="card-header">
+<div class="container text-center">
+<div class="card d-inline-block ml-4 mt-4 w-75">
+   <div class="card-header">
+      <h5 class="card-title"><%= label_tag :label, "Student's Iteration Feedback" %></h5>
+   </div>
+   <div class="card-body">
+      <p>Iteration Status: <%= @iteration.status %></p>
+      <p>Comments: <%= @iteration.comments %></p>
+   </div>
+</div>
+<div class="card d-inline-block ml-4 mt-4 w-75">
+   <div class="card-header">
       <h5 class="card-title">Current View </h5>
-      </div>
-      <div class="card-body">
+   </div>
+   <div class="card-body">
       <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
-        <p>
-          <%= form.label :teacher_status, "Set Iteration Status: " %>
-           <%= form.select(:teacher_status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.teacher_status)) %>
-        </p>
-        <p>
-          <%= form.label :teacher_comment, "Set Comment:"%>
-          <br>
-          <%= form.text_area :teacher_comment, size: "50x5" %>
-        </p>
-    <p>
-      <%= form.submit id: "update-iteration", :class => "btn btn-warning"%>
-    </p>
-    </div>
-    </div>
-<% end %>
-
-<% else if is_student_on_team(current_user, @team) %>
-  <div class="container text-center">
-  <div class="card d-inline-block ml-4 mt-4 w-75">
-    <div class="card-header">
-    <h2 class="card-title"><%= label_tag :label, "Professor Feedback" %></h2>
-    </div>
-    <div class="card-body">
-       <p>Iteration Status: <%= @iteration.teacher_status %></p>
-       
-       <p>Comments: <%= @iteration.teacher_comment %></p>
-  </div>
-  </div>
-
-  <div class="card d-inline-block ml-4 mt-4 w-75">
-    <div class="card-header">
-    <h2 class="card-title">Current View</h2>
-    <div class="card-body">
-    <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
       <p>
-        <%= form.label :status, "Set Iteration Status: " %>
+         <%= form.label :teacher_status, "Set Iteration Status: " %>
+         <%= form.select(:teacher_status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.teacher_status)) %>
+      </p>
+      <p>
+         <%= form.label :teacher_comment, "Set Comment:"%>
+         <br>
+         <%= form.text_area :teacher_comment, size: "50x5" %>
+      </p>
+      <p>
+         <%= form.submit id: "update-iteration", :class => "btn btn-warning"%>
+      </p>
+   </div>
+</div>
+<% end %>
+<% else if is_student_on_team(current_user, @team) %>
+<div class="container text-center">
+<div class="card d-inline-block ml-4 mt-4 w-75">
+   <div class="card-header">
+      <h2 class="card-title"><%= label_tag :label, "Professor Feedback" %></h2>
+   </div>
+   <div class="card-body">
+      <p>Iteration Status: <%= @iteration.teacher_status %></p>
+      <p>Comments: <%= @iteration.teacher_comment %></p>
+   </div>
+</div>
+<div class="card d-inline-block ml-4 mt-4 w-75">
+   <div class="card-header">
+      <h2 class="card-title">Current View</h2>
+   </div>
+   <div class="card-body">
+      <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
+      <p>
+         <%= form.label :status, "Set Iteration Status: " %>
          <%= form.select(:status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.status)) %>
       </p>
       <p>
-        <%= form.label :comments, "Set Comment:"%>
-        <br>
-        <%= form.text_area :comments, size: "50x5" %>
+         <%= form.label :comments, "Set Comment:"%>
+         <br>
+         <%= form.text_area :comments, size: "50x5" %>
       </p>
-      
       <p>
-        <%= form.submit id: "update-iteration", :class => "btn btn-warning" %>
+         <%= form.submit id: "update-iteration", :class => "btn btn-warning" %>
       </p>
-  </div>
-  </div>
-  
+   </div>
+</div>
 <% end %>
 <% end %>
 <% end %>
