@@ -38,6 +38,7 @@
            <a href=<%= @team.version_control_link %> target="_blank"><%= @team.version_control_link %></a>
        <% else %>
             <a class="disabled">N/A</a>
+            <br><br>
         <% end %>
     </div>
   </div>
@@ -51,6 +52,7 @@
            <a href=<%= @team.production_link %> target="_blank"><%= @team.production_link %></a>
         <% else %>
             <a class="disabled">N/A</a>
+            <br><br>
         <% end %>
     </div>
   </div>
@@ -64,6 +66,7 @@
            <a href=<%= @team.management_link %> target="_blank"><%= @team.management_link %></a>
         <% else %>
             <a class="disabled">N/A</a>
+            <br><br>
         <% end %>
     </div>
   </div>
@@ -101,35 +104,36 @@ table, th, td {
 
 <body>
 
-
-
+<br>
+<div class=card d-inline-block ml-2 mt-4 text-center>
 <% if is_instructor_html() || is_student_on_team(current_user, @team) %>
-
-
-<h2> iterations</h2>
+<div class="card-header">
+<h2 class="card-title">Iterations</h2>
+</div>
 <% @team.iterations.each.with_index do |iterations,index| %>
 <table style="width:100%">
 
     <tr>
       
-        <th><%= label_tag "Iteration #{index} Status: \n" %>
+        <th><%= label_tag :iteration, "Iteration #{index} Status: \n" %>
        <p><%= iterations.status %></p>
 
         </th>
        
         <th>
             <%= label_tag "Last updated at: \n" %>
-            <p> <%= iterations.updated_at.strftime('%m/%d/%Y %I:%M %p') %></p>
+            <p> <%= iterations.updated_at.strftime('%a, %b %d, %Y %I:%M %p') %></p>
         </th>
            
-            <td><%= link_to 'view', iterations_details_path(@team, iterations)  %></td>  
-         <td><%= link_to 'delete', iterations_delete_path(@team, iterations),
-                 data: { confirm: 'Are you sure?'} %></td>  
+            <td><%= link_to 'View', iterations_details_path(@team, iterations), id: "view", :class => "btn btn-primary" %></td>  
+         <td><%= link_to 'Delete', iterations_delete_path(@team, iterations),
+                 data: { confirm: 'Are you sure?'}, id: "delete", :class => "btn btn-danger"%></td>  
    </tr>
  </table>
 <% end %>
+</div>
 
-<h2> Add a iteration </h2>
+<br>
 <%= form_with(model: [ @team, @team.iterations.build ], local: true) do |form| %>
   <!--<p>
     <%= form.label :status %><br>
@@ -141,58 +145,14 @@ table, th, td {
   </p>
   -->
   <p>
-    <%= form.submit %>
+    <%= form.submit id: "submit-iteration", :class => "btn btn-warning", :value => "Add Iteration" %>
   </p>
 <% end %>
 
-<% end %>
 
 
 </body>
 
-<!--
-<% else if is_student_on_team(current_user, @team) %>
-
-<table style="width:100%">
- <%= form_tag  iter_path, :method => "post" do |form| %> 
- 
-   <tr>
-       <th><%= label_tag "Iteration 1 Status: " %>
-       <a class="disabled"> <%= @team.status1 %></a>
-       </th>
-      <th><%= label_tag "Iteration 2 Status: " %>
-       <a class="disabled"> <%= @team.status2 %></a>
-       </th>
-       <th><%= label_tag "Iteration 3 Status: " %>
-       <a class="disabled"> <%= @team.status3 %></a>
-       </th>
-       <th><%= label_tag "Iteration 4 Status: " %>
-       <a class="disabled"> <%= @team.status4 %></a>
-       </th>
-   </th>
-   </tr>
- 
-  <tr>
-   
-   <th>
-   <a class="disabled"> <%= @team.iteration1 %></a>
-   </th>
-   <th>
-   <a class="disabled"> <%= @team.iteration2 %></a>
-   </th>
-    <th>
-      <a class="disabled"> <%= @team.iteration3 %></a>
-   </th>
-     <th>
-      <a class="disabled"> <%= @team.iteration4 %></a>
-   </th>
- </tr>
- 
-
-  
-</table>
--->
-<% end %>
 <% end %>
 
 
