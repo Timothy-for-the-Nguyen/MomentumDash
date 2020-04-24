@@ -136,7 +136,7 @@ table, th, td {
 <br>
 <%= form_with(model: [ @team, @team.iterations.build ], local: true) do |form| %>
   <p>
-    <%= form.submit id: "submit-iteration", :class => "btn btn-warning", :value => "Add Iteration" %>
+    <%= form.submit id: "submit-iteration", :class => "btn btn-warning" %>
   </p>
 <% end %>
 

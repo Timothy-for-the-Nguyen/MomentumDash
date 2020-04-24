@@ -33,34 +33,41 @@
           <%= form.text_area :teacher_comment, size: "50x5" %>
         </p>
     <p>
-      <%= form.submit %>
+      <%= form.submit id: "update-iteration", :class => "btn btn-warning"%>
     </p>
     </div>
     </div>
 <% end %>
 
 <% else if is_student_on_team(current_user, @team) %>
-<h2><%= label_tag "Professor Feedback: \n" %></h2>
-
+  <div class="container text-center">
+  <div class="card d-inline-block ml-4 mt-4 w-75">
+    <div class="card-header">
+    <h2 class="card-title"><%= label_tag "Professor Feedback: \n" %></h2>
+    </div>
+    <div class="card-body">
        <p>Iteration Status: <%= @iteration.teacher_status %></p>
        
        <p>Comments: <%= @iteration.teacher_comment %></p>
+  </div>
+  </div>
 
-
-<h2>Current View</h2>
-<%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
-  <p>
-    <%= form.label :status %><br>
-     <%= form.select(:status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.status)) %>
-  </p>
-  <p>
-    <%= form.label :comments %><br>
-    <%= form.text_area :comments %>
-  </p>
-  
-  <p>
-    <%= form.submit %>
-  </p>
+  <div class="card d-inline-block ml-4 mt-4 w-75">
+    <div class="card-header">
+    <h2 class="card-title">Current View</h2>
+    <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
+      <p>
+        <%= form.label :status %><br>
+         <%= form.select(:status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.status)) %>
+      </p>
+      <p>
+        <%= form.label :comments %><br>
+        <%= form.text_area :comments %>
+      </p>
+      
+      <p>
+        <%= form.submit id: "update-iteration", :class => "btn btn-warning" %>
+      </p>
   </div>
   </div>
   
