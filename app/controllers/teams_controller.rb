@@ -17,6 +17,7 @@ class TeamsController < ApplicationController
   
   def show
     @team = Team.find(params[:id])
+    @iterations = @team.iterations.order('created_at ASC')
   end
   
   def new

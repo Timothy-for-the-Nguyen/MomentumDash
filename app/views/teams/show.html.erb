@@ -151,7 +151,7 @@
                   <th><%= label_tag :delete, "Delete" %>
                   -->
                </tr>
-               <% @team.iterations.each.with_index do |iterations,index| %>
+               <% @iterations.each.with_index do |iterations,index| %>
                <tr>
                   <td><%= link_to "#{index}", iterations_details_path(@team, iterations) %></td>
                   <td><%= link_to "#{iterations.status}",iterations_details_path(@team, iterations)  %></td>
