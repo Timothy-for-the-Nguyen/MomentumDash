@@ -157,8 +157,8 @@
                   <td><%= link_to "#{iterations.status}",iterations_details_path(@team, iterations)  %></td>
                   <td><%= link_to "#{iterations.teacher_status}",iterations_details_path(@team, iterations)  %></td>
                   <td><%= link_to "#{iterations.updated_at.strftime('%a, %b %d, %Y %I:%M %p')}",iterations_details_path(@team, iterations) %></td>
-                  <td><%= link_to 'View', iterations_details_path(@team, iterations), id: "view", :class => "btn btn-primary" %></td>
-                 <!-- <td><%= link_to 'Delete', iterations_delete_path(@team, iterations),
+                 <!-- <td><%= link_to 'View', iterations_details_path(@team, iterations), id: "view", :class => "btn btn-primary" %></td>
+                  <td><%= link_to 'Delete', iterations_delete_path(@team, iterations),
                      data: { confirm: 'Are you sure you want to delete this iteration?'}, id: "delete", :class => "btn btn-danger"%></td>
                      <td class="tooltip"><% "#{index}"%>
                   <span class="tooltiptext"><%=iterations.teacher_comment%></span></td>
