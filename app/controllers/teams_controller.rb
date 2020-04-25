@@ -141,7 +141,7 @@ class TeamsController < ApplicationController
   end
   
   private def is_admin_or_student_on_team(team)
-    unless is_student_in_section(current_user, team.project.section) || has_section_html(team.project.section)
+    unless is_student_in_section(current_user, team.project.section) || has_section_html(team.project.section) || is_instructor_html
       flash[:warning] = "Unauthorized action"
       redirect_to home_path
     end
