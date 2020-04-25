@@ -22,7 +22,7 @@
       <%= form_with(url: iterations_update_path(@team,@iteration), model: @iteration, local: true) do |form| %>
       <p>
          <%= form.label :teacher_status, "Set Iteration Status: " %>
-         <%= form.select(:teacher_status, options_for_select([['Submitted', 'Submitted'], ['Missing', 'Missing'],['Not submitted','Not submitted']], @iteration.teacher_status)) %>
+         <%= form.select(:teacher_status, options_for_select([['Not submitted','Not submitted'],['Submitted', 'Submitted'], ['Missing', 'Missing']], @iteration.teacher_status)) %>
       </p>
       <p>
          <%= form.label :teacher_comment, "Set Comment:"%>
@@ -32,6 +32,8 @@
       <p>
          <%= form.submit id: "update-iteration", :class => "btn btn-warning"%>
       </p>
+      <p><%= link_to 'Delete Iteration', iterations_delete_path(@team, @iteration),
+                     data: { confirm: 'Are you sure you want to delete this iteration?'}, id: "delete", :class => "btn btn-danger"%></p>
    </div>
 </div>
 <% end %>
@@ -64,6 +66,8 @@
       <p>
          <%= form.submit id: "update-iteration", :class => "btn btn-warning" %>
       </p>
+      <p><%= link_to 'Delete Iteration', iterations_delete_path(@team, @iterations),
+                     data: { confirm: 'Are you sure you want to delete this iteration?'}, id: "delete", :class => "btn btn-danger"%></p>
    </div>
 </div>
 <% end %>

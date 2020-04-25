@@ -1,7 +1,7 @@
 <div>
 <br>
 <h1 class="display-4 mt-5 ml-5 d-inline">Team: <%=@team.name%></h1>
-<% if has_section_html(@team.project.section.id) || is_student_in_section(current_user, @team.project.section) #is_student_on_team(current_user, @team) %>
+<% if has_section_html(@team.project.section.id) || is_student_in_section(current_user, @team.project.section) || is_instructor_html()#is_student_on_team(current_user, @team) %>
 <%= link_to 'Edit Team' , edit_team_path(@team), class: "btn btn-danger float-right mt-5 mr-5"%>
 <% end %>
 <% if is_instructor_html || has_section_html(@team.project.section.id) %>
@@ -106,18 +106,20 @@
                   <th><%= label_tag :iteration, "Student Status" %></th>
                   <th><%= label_tag :iteration, "Teacher Status" %></th>
                   <th><%= label_tag :updated, "Last Updated" %>
-                  <th><%= label_tag :view, "View" %></th>
+                 <!-- <th><%= label_tag :view, "View" %></th>
                   <th><%= label_tag :delete, "Delete" %>
+                  -->
                </tr>
                <% @team.iterations.each.with_index do |iterations,index| %>
                <tr>
-                  <td><%= "#{index}" %></td>
-                  <td><%= iterations.status %></td>
-                  <td><%= iterations.teacher_status %></td>
-                  <td> <%= iterations.updated_at.strftime('%a, %b %d, %Y %I:%M %p') %></td>
-                  <td><%= link_to 'View', iterations_details_path(@team, iterations), id: "view", :class => "btn btn-primary" %></td>
+                  <td><%= link_to "#{index}", iterations_details_path(@team, iterations) %></td>
+                  <td span=<%=iterations.comments%>><%= link_to "#{iterations.status}",iterations_details_path(@team, iterations)  %></td>
+                  <td span=<%=iterations.teacher_comment%>><%= link_to "#{iterations.teacher_status}",iterations_details_path(@team, iterations)  %></td>
+                  <td><%= link_to "#{iterations.updated_at.strftime('%a, %b %d, %Y %I:%M %p')}",iterations_details_path(@team, iterations) %></td>
+                 <!-- <td><%= link_to 'View', iterations_details_path(@team, iterations), id: "view", :class => "btn btn-primary" %></td>
                   <td><%= link_to 'Delete', iterations_delete_path(@team, iterations),
                      data: { confirm: 'Are you sure you want to delete this iteration?'}, id: "delete", :class => "btn btn-danger"%></td>
+                     -->
                </tr>
                <% end %>
             </table>
