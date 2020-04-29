@@ -153,7 +153,7 @@
                </tr>
                <% @iterations.each.with_index do |iterations,index| %>
                <tr>
-                  <td><%= link_to "#{index}", iterations_details_path(@team, iterations), :title => iterations.comment %></td>
+                  <td><%= link_to "#{index}", iterations_details_path(@team, iterations), :title => iterations.comments %></td>
                   <td><%= link_to "#{iterations.status}", iterations_details_path(@team, iterations) %></td>
                   <td><%= link_to "#{iterations.teacher_status}", iterations_details_path(@team, iterations), :title => iterations.teacher_comment %></td>
                   <td><%= link_to "#{iterations.updated_at.strftime('%a, %b %d, %Y %I:%M %p')}",iterations_details_path(@team, iterations) %></td>
