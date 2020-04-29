@@ -32,9 +32,8 @@
     </div>
   </div>
 <% else %>
-  <div class="jumbotron w-50 mx-auto">
+  <div class="jumbotron w-25 mx-auto">
   <%= form_for Student.new, html: { id: "submit" } do |f| %>
-    
       <%= f.hidden_field :name, :id => "form_name", :class => "form-control" %>
       
       <%= f.hidden_field :email, :id => "form_email", :class => "form-control" %>
@@ -51,8 +50,6 @@
           
             function onSignIn(googleUser) {
               var profile = googleUser.getBasicProfile();
-              // The ID token you need to pass to your backend:
-              // var id_token = googleUser.getAuthResponse().id_token;
               
               document.getElementById('form_name').value = profile.getName();
               document.getElementById('form_email').value = profile.getEmail();
