@@ -1,8 +1,8 @@
 # MomentumDash
 
 ## Deploying to Heroku
-1. Create an account. We reccomend using a personal account instead of an organization to deploy your app because personal accounts have free dynos.
-2. Connect your GitHub to Heroku under the Deploy tab.
+1. [Create an account](https://signup.heroku.com). We reccomend using a personal account instead of an organization to deploy your app because personal accounts have [free dynos](https://devcenter.heroku.com/articles/free-dyno-hours).
+2. [Enable GitHub integration](https://devcenter.heroku.com/articles/github-integration) under the Deploy tab.
 3. Connect your repo to Heroku and hit Deploy Branch.
 4. Enable automatic deploys to allow future commits to update on Heroku without manual intervention.
 5. Click on the More button on Heroku and open up the console.
