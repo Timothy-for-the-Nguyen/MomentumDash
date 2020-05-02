@@ -1,4 +1,4 @@
-# README
+# MomentumDash
 
 ## Deploying to Heroku
 1. Create an account. We reccomend using a personal account instead of an organization to deploy your app because personal accounts have free dynos.
@@ -32,10 +32,8 @@ bundle install --without production
 5. You should see a bunch of red text. Copy the command on the page and run it to do a database migration.
 6. Try running the app again.
 
-## Things to Know
+## Helpful Tips
 
-* Learn Ruby on Rails before diving into the project!
-
+* Learn Ruby on Rails before diving into the project. Do your assigned homework early because they are helpful!
 * Run [migrations](https://guides.rubyonrails.org/v3.2/migrations.html) with ```rake db:migrate``` whenever you alter your database.
-
 * Learn how to write and run tests.
